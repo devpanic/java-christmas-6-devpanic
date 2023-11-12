@@ -22,4 +22,12 @@ public class Discount {
         }
         return 0;
     }
+
+    public int specialDayDiscount(int inputDate){
+        Dates calcDate = new Dates();
+        if(calcDate.isSpecialDay(inputDate)){
+            return 1000;
+        }
+        return 0;
+    }
 }
