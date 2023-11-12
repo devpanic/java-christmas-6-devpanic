@@ -57,12 +57,12 @@ class ApplicationTest extends NsTest {
     @DisplayName("일자를 입력하면 요일을 가지고 올 수 있는지 확인")
     @CsvSource(value = {"1, FRIDAY", "2, SATURDAY", "3, SUNDAY", "4, MONDAY",
                         "5, TUESDAY", "6, WEDNESDAY", "7, TURSDAY", "-1, NOTHING"})
-    void calcDayOfWeekTest(int input, Day expected) {
+    void calcDayOfWeekTest(int input, Days expected) {
         // given
         Dates testDates = new Dates();
 
         // when
-        Day currentDay = testDates.calcDayOfWeek(input);
+        Days currentDay = testDates.calcDayOfWeek(input);
 
         // then
         assertEquals(expected,currentDay);

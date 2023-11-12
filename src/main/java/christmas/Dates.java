@@ -1,7 +1,7 @@
 package christmas;
 
 public class Dates {
-    public Day calcDayOfWeek(int inputDate){
-        return Day.findDay(inputDate % 7);
+    public Days calcDayOfWeek(int inputDate){
+        return Days.findDay(inputDate % 7);
     }
 }
