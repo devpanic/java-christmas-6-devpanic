@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class ApplicationTest extends NsTest {
     private static final String LINE_SEPARATOR = System.lineSeparator();
@@ -66,6 +67,24 @@ class ApplicationTest extends NsTest {
 
         // then
         assertEquals(expected,currentDay);
+    }
+
+    @ParameterizedTest
+    @DisplayName("요일별 할인 정보 제공 테스트")
+    @CsvSource(value = {"1, 0, 2023", "2, 0, 2023", "3, 2023, 0", "4, 2023, 0",
+            "5, 2023, 0", "6, 2023, 0", "7, 2023, 0", "-1, 0, 0"})
+    void dayDiscountTest(int input, int expectedDessertDiscount, int expectedMainDishDiscount){
+        // given
+        Discount testDiscount = new Discount();
+        Dates testDates = new Dates();
+
+        // when
+        int dessertDiscount = testDiscount.dayDessertDiscount(testDates.calcDayOfWeek(input));
+        int mainDishDiscount = testDiscount.dayMainDishDiscount(testDates.calcDayOfWeek(input));
+
+        // then
+        assertEquals(expectedDessertDiscount, dessertDiscount);
+        assertEquals(expectedMainDishDiscount, mainDishDiscount);
     }
 
     @Override
