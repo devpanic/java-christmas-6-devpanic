@@ -87,6 +87,26 @@ class ApplicationTest extends NsTest {
         assertEquals(expectedMainDishDiscount, mainDishDiscount);
     }
 
+    @ParameterizedTest
+    @DisplayName("입력 일자의 최대 할인 폭 계산 테스트")
+    @CsvSource(value = {"24, 6323", "1, 3023", "25, 6423"})
+    void calcDiscountLimitTest(int input, int expectedDessertDiscount){
+        // given
+        Discount testDiscount = new Discount();
+        Dates testDates = new Dates();
+
+        // when
+        int dDayDiscount = testDiscount.dDayDiscount(input);
+        int specialDiscount = testDiscount.specialDayDiscount(input);
+        int dessertDiscount = testDiscount.dayDessertDiscount(testDates.calcDayOfWeek(input));
+        int mainDishDiscount = testDiscount.dayMainDishDiscount(testDates.calcDayOfWeek(input));
+
+        int totalDiscount = dDayDiscount + specialDiscount + dessertDiscount + mainDishDiscount;
+
+        // then
+        assertEquals(expectedDessertDiscount, totalDiscount);
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});

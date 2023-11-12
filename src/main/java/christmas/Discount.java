@@ -16,7 +16,7 @@ public class Discount {
     }
 
     public int dDayDiscount(int inputDate){
-        if(inputDate < 25){
+        if(inputDate <= 25){
             int dailyDiscount = 900 + inputDate * 100;
             return dailyDiscount;
         }
