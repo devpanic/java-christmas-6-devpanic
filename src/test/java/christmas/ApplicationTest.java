@@ -2,9 +2,13 @@ package christmas;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class ApplicationTest extends NsTest {
     private static final String LINE_SEPARATOR = System.lineSeparator();
@@ -47,6 +51,21 @@ class ApplicationTest extends NsTest {
             runException("3", "제로콜라-a");
             assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         });
+    }
+
+    @ParameterizedTest
+    @DisplayName("일자를 입력하면 요일을 가지고 올 수 있는지 확인")
+    @CsvSource(value = {"1, FRIDAY", "2, SATURDAY", "3, SUNDAY", "4, MONDAY",
+                        "5, TUESDAY", "6, WEDNESDAY", "7, TURSDAY", "-1, NOTHING"})
+    void calcDayOfWeekTest(int input, Day expected) {
+        // given
+        Dates testDates = new Dates();
+
+        // when
+        Day currentDay = testDates.calcDayOfWeek(input);
+
+        // then
+        assertEquals(expected,currentDay);
     }
 
     @Override
