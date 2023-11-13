@@ -108,18 +108,19 @@ class ApplicationTest extends NsTest {
 
     @ParameterizedTest
     @DisplayName("샴페인 및 배지 증정 테스트")
-    @CsvSource(value = {"120000, 20000, true, 산타", "120001, 4000, true, none", "119999, 9999, false, 별"})
+    @CsvSource(value = {"120000, 20000, true, 산타", "120001, 4000, true, -", "119999, 9999, false, 별"})
     void giftTest(int totalPuchase, int totalDiscount, boolean expectedChampagne, String expectedBadge){
         // given
+        User testUser = new User(1);
         Gift testGift = new Gift(totalPuchase, totalDiscount);
         
         // when
         boolean isChampagne = testGift.giveChampagne();
-        String badge = testGift.giveBadge();
+        testGift.giveBadge(testUser);
         
         // then
         assertEquals(expectedChampagne, isChampagne);
-        assertEquals(expectedBadge, badge);
+        assertEquals(expectedBadge, testUser.getBadge());
     }
 
     @Override
