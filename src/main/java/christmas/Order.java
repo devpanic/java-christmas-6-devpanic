@@ -21,6 +21,10 @@ public class Order {
         this.perDiscount = 0;
     }
 
+    public String getMenu(){
+        return menu;
+    }
+
     public void isAppetizer(){
         Appetizers currentMenu = Appetizers.findAppetizer(menu);
 

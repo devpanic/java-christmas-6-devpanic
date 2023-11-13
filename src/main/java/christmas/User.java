@@ -1,8 +1,10 @@
 package christmas;
 
+import java.util.List;
+
 public class User {
     private int reservationDate;
-//    private orderList;
+    private List<Order> orderMenuSet;
     private int totalPurchase;
     private int discountDday;
     private int discountDessert;
@@ -15,8 +17,8 @@ public class User {
     public User(){
     }
 
-    public void makeReservation(){
-
+    public void makeReservation(List<Order> reservationMenuSet){
+        this.orderMenuSet = reservationMenuSet;
     }
 
     public void reserveDate(int reservationDate){

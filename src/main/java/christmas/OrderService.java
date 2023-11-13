@@ -23,6 +23,8 @@ public class OrderService {
         outputView.printWelcomeMessage();
         currentCustomer.reserveDate(inputView.inputDate());
 
+        outputView.printTakeOrderMessage();
+        currentCustomer.makeReservation(inputView.inputAllOrder());
     }
 
     public void makeOrderItem(String menu, int menuCount){
