@@ -16,14 +16,35 @@ public class Gift {
         return false;
     }
 
-    public String giveBadge(){
+    public boolean isGiveSanta(){
         if(totalDiscount >= 20000){
-            return "별";
-        } else if (totalDiscount >= 10000){
-            return "트리";
-        } else if (totalDiscount >= 5000){
-            return "산타";
+            return true;
         }
-        return "";
+        return false;
+    }
+
+    public boolean isGiveTree(){
+        if(totalDiscount >= 10000){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isGiveStar(){
+        if(totalDiscount >= 5000){
+            return true;
+        }
+        return false;
+    }
+
+    public String giveBadge(){
+        if(isGiveSanta()){
+            return "산타";
+        } else if (isGiveTree()){
+            return "트리";
+        } else if (isGiveStar()){
+            return "별";
+        }
+        return "none";
     }
 }
