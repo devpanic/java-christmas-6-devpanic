@@ -5,7 +5,9 @@ import java.util.List;
 public class User {
     private int reservationDate;
     private List<Order> orderMenuSet;
-    private int totalPurchase;
+    private Dates dateService;
+    private Discount discountService;
+    private int totalOrderPrice;
     private int discountDday;
     private int discountDessert;
     private int discountMainDish;
@@ -15,14 +17,7 @@ public class User {
     private String badge;
 
     public User(){
-    }
-
-    public void makeReservation(List<Order> reservationMenuSet){
-        this.orderMenuSet = reservationMenuSet;
-    }
-
-    public void reserveDate(int reservationDate){
-        this.reservationDate = reservationDate;
+        this.totalOrderPrice = 0;
     }
 
     public void setBadge(String badge){
@@ -31,5 +26,26 @@ public class User {
 
     public String getBadge(){
         return badge;
+    }
+
+    public void makeReservation(List<Order> reservationMenuSet){
+        this.dateService = new Dates(reservationDate);
+        this.discountService = new Discount(reservationDate, dateService.calcDayOfWeek(reservationDate));
+        for(Order order : reservationMenuSet){
+            order.makeOrderInfo();
+            order.makeDiscountInfo(discountService.dayDessertDiscount(), discountService.dayMainDishDiscount());
+        }
+        this.orderMenuSet = reservationMenuSet;
+    }
+
+    public void reserveDate(int reservationDate){
+        this.reservationDate = reservationDate;
+    }
+
+    public int calcOrderVanillaPrice(){
+        for(Order order : orderMenuSet){
+            totalOrderPrice += order.getPerOrderPrice();
+        }
+        return totalOrderPrice;
     }
 }

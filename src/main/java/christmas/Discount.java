@@ -43,7 +43,7 @@ public class Discount {
     }
 
     public int specialDayDiscount(){
-        Dates calcDate = new Dates();
+        Dates calcDate = new Dates(inputDate);
         if(calcDate.isSpecialDay(inputDate)){
             return 1000;
         }

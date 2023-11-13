@@ -8,8 +8,6 @@ import java.util.List;
 public class OrderService {
     private List<User> customers = new ArrayList<>();
     private User currentCustomer;
-    Dates dateService = new Dates();
-    Discount testDiscount;
     InputView inputView = new InputView();
     OutputView outputView = new OutputView();
 
@@ -27,14 +25,14 @@ public class OrderService {
         currentCustomer.makeReservation(inputView.inputAllOrder());
     }
 
-    public void makeOrderItem(String menu, int menuCount){
-        Order currentOrderItem = new Order(menu,menuCount);
-        currentOrderItem.makeOrderInfo();
+    public void requestTotalPriceInfo(){
+        outputView.printTotalPriceTitleMessage();
+        outputView.printTotalPriceContentMessage(currentCustomer.calcOrderVanillaPrice());
     }
 
     public void doOrder(){
-        // Get Order from Console
         createUser();
         requestOrder();
+        requestTotalPriceInfo();
     }
 }

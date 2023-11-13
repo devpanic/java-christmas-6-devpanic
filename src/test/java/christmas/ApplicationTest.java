@@ -59,7 +59,7 @@ class ApplicationTest extends NsTest {
                         "5, TUESDAY", "6, WEDNESDAY", "7, TURSDAY", "-1, NOTHING"})
     void calcDayOfWeekTest(int input, Days expected) {
         // given
-        Dates testDates = new Dates();
+        Dates testDates = new Dates(input);
 
         // when
         Days currentDay = testDates.calcDayOfWeek(input);
@@ -74,7 +74,7 @@ class ApplicationTest extends NsTest {
             "5, 2023, 0", "6, 2023, 0", "7, 2023, 0", "-1, 0, 0"})
     void dayDiscountTest(int input, int expectedDessertDiscount, int expectedMainDishDiscount){
         // given
-        Dates testDates = new Dates();
+        Dates testDates = new Dates(input);
         Discount testDiscount = new Discount(input, testDates.calcDayOfWeek(input));
 
         // when
@@ -91,7 +91,7 @@ class ApplicationTest extends NsTest {
     @CsvSource(value = {"24, 6323", "1, 3023", "25, 6423"})
     void calcDiscountLimitTest(int input, int expectedDessertDiscount){
         // given
-        Dates testDates = new Dates();
+        Dates testDates = new Dates(input);
         Discount testDiscount = new Discount(input, testDates.calcDayOfWeek(input));
 
         // when
@@ -133,14 +133,14 @@ class ApplicationTest extends NsTest {
     void orderCategoryTest(int inputDate, String menu, int menuCount, int expectedPerOrderPrice){
         // given
         Order testOrder = new Order(menu, menuCount);
-        Dates testDates = new Dates();
+        Dates testDates = new Dates(inputDate);
         Discount testDiscount = new Discount(inputDate, testDates.calcDayOfWeek(inputDate));
 
         // when
         int dessertDiscount = testDiscount.dayDessertDiscount();
         int mainDishDiscount = testDiscount.dayMainDishDiscount();
         testOrder.makeOrderInfo();
-        testOrder.calcDiscount(dessertDiscount, mainDishDiscount);
+        testOrder.makeDiscountInfo(dessertDiscount, mainDishDiscount);
 
         // then
         assertEquals(expectedPerOrderPrice,testOrder.getPerOrderPrice());

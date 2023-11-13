@@ -65,13 +65,13 @@ public class Order {
         }
     }
 
-    public void calcDiscount(int dessertDiscount, int mainDishDiscount){
+    public void makeDiscountInfo(int dessertDiscount, int mainDishDiscount){
         if(menuCategory.equals("Desserts")){
             this.perDiscount = dessertDiscount;
         } else if(menuCategory.equals("MainDishes")){
             this.perDiscount = mainDishDiscount;
         }
-        this.perOrderPrice = (perPrice - perDiscount) * menuCount;
+        this.perOrderPrice = perPrice * menuCount;
         this.perOrderDiscount = perDiscount * menuCount;
     }
 
