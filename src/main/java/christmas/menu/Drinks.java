@@ -18,8 +18,20 @@ public enum Drinks {
         this.price = price;
     }
 
+    public String getConsoleMessage(){
+        return consoleMessage;
+    }
+
+    public String getMenu(){
+        return menu;
+    }
+
+    public int getPrice(){
+        return price;
+    }
+
     public boolean checkWhichDrink(String inputMenu){
-        return this.menu == menu;
+        return this.menu.equals(inputMenu);
     }
 
     public static Drinks findDrink(String inputDrink) {

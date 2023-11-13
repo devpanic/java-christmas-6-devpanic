@@ -18,14 +18,26 @@ public enum MainDishes {
         this.price = price;
     }
 
+    public String getConsoleMessage(){
+        return consoleMessage;
+    }
+
+    public String getMenu(){
+        return menu;
+    }
+
+    public int getPrice(){
+        return price;
+    }
+
     public boolean checkWhichMainDish(String inputMenu){
-        return this.menu == menu;
+        return this.menu.equals(inputMenu);
     }
 
     public static MainDishes findMainDish(String inputMainDish) {
         return Arrays.stream(MainDishes.values())
                 .filter(mainDish -> mainDish.checkWhichMainDish(inputMainDish))
-                .findAny()
+                .findFirst()
                 .orElse(MainDishes.NOTHING);
     }
 }

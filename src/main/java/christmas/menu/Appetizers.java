@@ -18,8 +18,20 @@ public enum Appetizers {
         this.price = price;
     }
 
+    public String getConsoleMessage(){
+        return consoleMessage;
+    }
+
+    public String getMenu(){
+        return menu;
+    }
+
+    public int getPrice(){
+        return price;
+    }
+
     public boolean checkWhichAppetizer(String inputMenu){
-        return this.menu == menu;
+        return this.menu.equals(inputMenu);
     }
 
     public static Appetizers findAppetizer(String inputAppetizer) {
