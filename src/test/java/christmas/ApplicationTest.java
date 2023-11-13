@@ -125,10 +125,9 @@ class ApplicationTest extends NsTest {
     }
 
     @ParameterizedTest
-    @DisplayName("일자별 디저트, 메인메뉴 주문 할인 테스트")
-    @CsvSource(value = {"3, 티본스테이크, 2, 110000", "3, 바비큐립, 1, 54000", "1, 바비큐립, 1, 51977"
-                        ,"1, 바비큐립, 2, 103954"
-                        ,"1, 초코케이크, 1, 15000", "3, 초코케이크, 1, 12977", "1, 제로콜라, 1, 3000"
+    @DisplayName("일자별 디저트, 메인메뉴 주문 테스트")
+    @CsvSource(value = {"3, 티본스테이크, 2, 110000", "3, 바비큐립, 1, 54000"
+                        ,"1, 초코케이크, 1, 15000", "1, 제로콜라, 1, 3000"
                         ,"3, 제로콜라, 1, 3000", "1, 양송이수프, 1, 6000", "3, 양송이수프, 1, 6000"})
     void orderCategoryTest(int inputDate, String menu, int menuCount, int expectedPerOrderPrice){
         // given

@@ -25,14 +25,22 @@ public class OrderService {
         currentCustomer.makeReservation(inputView.inputAllOrder());
     }
 
+    public void requestOrderInfo(){
+        outputView.printOrderInfoMessage();
+        outputView.printOrderMenuSetMessage(currentCustomer.getOrderMenuSet());
+        outputView.printSpace();
+    }
+
     public void requestTotalPriceInfo(){
         outputView.printTotalPriceTitleMessage();
         outputView.printTotalPriceContentMessage(currentCustomer.calcOrderVanillaPrice());
+        outputView.printSpace();
     }
 
     public void doOrder(){
         createUser();
         requestOrder();
+        requestOrderInfo();
         requestTotalPriceInfo();
     }
 }

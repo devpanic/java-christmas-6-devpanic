@@ -1,6 +1,7 @@
 package christmas;
 
 import java.util.List;
+import org.mockito.internal.matchers.Or;
 
 public class User {
     private int reservationDate;
@@ -28,6 +29,14 @@ public class User {
         return badge;
     }
 
+    public List<Order> getOrderMenuSet(){
+        return orderMenuSet;
+    }
+
+    public void reserveDate(int reservationDate){
+        this.reservationDate = reservationDate;
+    }
+
     public void makeReservation(List<Order> reservationMenuSet){
         this.dateService = new Dates(reservationDate);
         this.discountService = new Discount(reservationDate, dateService.calcDayOfWeek(reservationDate));
@@ -36,10 +45,6 @@ public class User {
             order.makeDiscountInfo(discountService.dayDessertDiscount(), discountService.dayMainDishDiscount());
         }
         this.orderMenuSet = reservationMenuSet;
-    }
-
-    public void reserveDate(int reservationDate){
-        this.reservationDate = reservationDate;
     }
 
     public int calcOrderVanillaPrice(){

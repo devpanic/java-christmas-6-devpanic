@@ -25,6 +25,14 @@ public class Order {
         return menu;
     }
 
+    public int getMenuCount(){
+        return menuCount;
+    }
+
+    public int getPerOrderPrice(){
+        return perOrderPrice;
+    }
+
     public void isAppetizer(){
         Appetizers currentMenu = Appetizers.findAppetizer(menu);
 
@@ -80,9 +88,5 @@ public class Order {
         isDesserts();
         isDrinks();
         isMainDishes();
-    }
-
-    public int getPerOrderPrice(){
-        return perOrderPrice;
     }
 }
