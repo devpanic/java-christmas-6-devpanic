@@ -12,7 +12,14 @@ public class User {
     private boolean giveChampange;
     private String badge;
 
-    public User(int reservationDate){
+    public User(){
+    }
+
+    public void makeReservation(){
+
+    }
+
+    public void reserveDate(int reservationDate){
         this.reservationDate = reservationDate;
     }
 

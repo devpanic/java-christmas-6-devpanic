@@ -111,10 +111,11 @@ class ApplicationTest extends NsTest {
     @CsvSource(value = {"120000, 20000, true, 산타", "120001, 4000, true, -", "119999, 9999, false, 별"})
     void giftTest(int totalPuchase, int totalDiscount, boolean expectedChampagne, String expectedBadge){
         // given
-        User testUser = new User(1);
+        User testUser = new User();
         Gift testGift = new Gift(totalPuchase, totalDiscount);
         
         // when
+        testUser.reserveDate(1);
         boolean isChampagne = testGift.giveChampagne();
         testGift.giveBadge(testUser);
         
