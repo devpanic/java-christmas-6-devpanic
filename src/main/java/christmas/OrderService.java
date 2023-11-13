@@ -20,10 +20,8 @@ public class OrderService {
     }
 
     public void requestOrder(){
-        // get readline data
         outputView.printWelcomeMessage();
-        int reserveDate = inputView.inputDate();
-        currentCustomer.reserveDate(reserveDate);
+        currentCustomer.reserveDate(inputView.inputDate());
 
     }
 
