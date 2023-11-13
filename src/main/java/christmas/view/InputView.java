@@ -3,7 +3,6 @@ package christmas.view;
 import camp.nextstep.edu.missionutils.Console;
 import christmas.Order;
 import christmas.Validation;
-import christmas.menu.AllMenu;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -21,7 +20,7 @@ public class InputView {
                 validator.checkDateDomain(reserveDate);
                 return reserveDate;
             } catch(NumberFormatException e){
-                System.out.println(e.getMessage());
+                System.out.println(ErrorMessages.INPUT_DATE.getMessage());
             } catch (IllegalArgumentException e){
                 System.out.println(e.getMessage());
             }
@@ -29,11 +28,11 @@ public class InputView {
     }
 
     public List<Order> inputAllOrder(){
-        List<String> menuSet = new ArrayList<>();
-        List<Order> orderSet = new ArrayList<>();
-        Order currentOrder;
         while(true){
             try{
+                List<String> menuSet = new ArrayList<>();
+                List<Order> orderSet = new ArrayList<>();
+                Order currentOrder;
                 StringTokenizer orderTokenizer = new StringTokenizer(Console.readLine(), ",");
                 while(orderTokenizer.hasMoreTokens()){
                     currentOrder = parseEachItem(orderTokenizer.nextToken());
