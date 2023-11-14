@@ -56,17 +56,19 @@ public class OrderService {
     }
 
     public void requestDdayDiscountInfo(){
-        outputView.printDiscountDdayMessage();
-        outputView.printPriceContentMessage(currentCustomer.calcDdayDiscount());
+        if(currentCustomer.calcDdayDiscount() != 0){
+            outputView.printDiscountDdayMessage();
+            outputView.printPriceContentMessage(currentCustomer.calcDdayDiscount());
+        }
     }
 
     public void requestWeekDiscountInfo(){
-        if(currentCustomer.getIsWeekday()){
+        if(currentCustomer.getIsWeekday() && currentCustomer.isWeekdayDiscountExist()){
             outputView.printDiscountWeekdayMessage();
-            outputView.printPriceContentMessage(currentCustomer.calcWeekdayDiscount());
-        } else if(!currentCustomer.getIsWeekday()){
+            outputView.printPriceContentMessage(currentCustomer.getDiscountWeekday());
+        } else if(!currentCustomer.getIsWeekday() && currentCustomer.isWeekendDiscountExist()){
             outputView.printDiscountWeekendMessage();
-            outputView.printPriceContentMessage(currentCustomer.calcWeekendDiscount());
+            outputView.printPriceContentMessage(currentCustomer.getDiscountWeekend());
         }
     }
 

@@ -89,7 +89,7 @@ public class OutputView {
 
     public void printDiscountTotalContentMessage(int totalDiscount){
         if(totalDiscount != 0){
-            System.out.println("-" + makeIntegerFormat(totalDiscount));
+            System.out.println("-" + makeIntegerFormat(totalDiscount) + "원");
         } else if(totalDiscount == 0){
             System.out.println("0원");
         }

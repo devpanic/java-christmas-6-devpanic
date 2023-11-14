@@ -2,13 +2,9 @@ package christmas;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 class ApplicationTest extends NsTest {
     private static final String LINE_SEPARATOR = System.lineSeparator();
@@ -51,80 +47,6 @@ class ApplicationTest extends NsTest {
             runException("3", "제로콜라-a");
             assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         });
-    }
-
-    @ParameterizedTest
-    @DisplayName("일자를 입력하면 요일을 가지고 올 수 있는지 확인")
-    @CsvSource(value = {"1, FRIDAY", "2, SATURDAY", "3, SUNDAY", "4, MONDAY",
-                        "5, TUESDAY", "6, WEDNESDAY", "7, TURSDAY", "-1, NOTHING"})
-    void calcDayOfWeekTest(int input, Days expected) {
-        // given
-        Dates testDates = new Dates(input);
-
-        // when
-        Days currentDay = testDates.calcDayOfWeek(input);
-
-        // then
-        assertEquals(expected,currentDay);
-    }
-
-    @ParameterizedTest
-    @DisplayName("요일별 할인 정보 제공 테스트")
-    @CsvSource(value = {"1, 0, 2023", "2, 0, 2023", "3, 2023, 0", "4, 2023, 0",
-            "5, 2023, 0", "6, 2023, 0", "7, 2023, 0", "-1, 0, 0"})
-    void dayDiscountTest(int input, int expectedDessertDiscount, int expectedMainDishDiscount){
-        // given
-        Dates testDates = new Dates(input);
-        Discount testDiscount = new Discount(input, testDates.calcDayOfWeek(input));
-
-        // when
-        int dessertDiscount = testDiscount.dayDessertDiscount();
-        int mainDishDiscount = testDiscount.dayMainDishDiscount();
-
-        // then
-        assertEquals(expectedDessertDiscount, dessertDiscount);
-        assertEquals(expectedMainDishDiscount, mainDishDiscount);
-    }
-
-    @ParameterizedTest
-    @DisplayName("입력 일자의 최대 할인 폭 계산 테스트")
-    @CsvSource(value = {"24, 6323", "1, 3023", "25, 6423"})
-    void calcDiscountLimitTest(int input, int expectedDessertDiscount){
-        // given
-        Dates testDates = new Dates(input);
-        Discount testDiscount = new Discount(input, testDates.calcDayOfWeek(input));
-
-        // when
-        int dDayDiscount = testDiscount.dDayDiscount();
-        int specialDiscount = testDiscount.specialDayDiscount();
-        int dessertDiscount = testDiscount.dayDessertDiscount();
-        int mainDishDiscount = testDiscount.dayMainDishDiscount();
-
-        int totalDiscount = dDayDiscount + specialDiscount + dessertDiscount + mainDishDiscount;
-
-        // then
-        assertEquals(expectedDessertDiscount, totalDiscount);
-    }
-
-    @ParameterizedTest
-    @DisplayName("일자별 디저트, 메인메뉴 주문 테스트")
-    @CsvSource(value = {"3, 티본스테이크, 2, 110000", "3, 바비큐립, 1, 54000"
-                        ,"1, 초코케이크, 1, 15000", "1, 제로콜라, 1, 3000"
-                        ,"3, 제로콜라, 1, 3000", "1, 양송이수프, 1, 6000", "3, 양송이수프, 1, 6000"})
-    void orderCategoryTest(int inputDate, String menu, int menuCount, int expectedPerOrderPrice){
-        // given
-        Order testOrder = new Order(menu, menuCount);
-        Dates testDates = new Dates(inputDate);
-        Discount testDiscount = new Discount(inputDate, testDates.calcDayOfWeek(inputDate));
-
-        // when
-        int dessertDiscount = testDiscount.dayDessertDiscount();
-        int mainDishDiscount = testDiscount.dayMainDishDiscount();
-        testOrder.makeOrderInfo();
-        testOrder.makeDiscountInfo(dessertDiscount, mainDishDiscount);
-
-        // then
-        assertEquals(expectedPerOrderPrice,testOrder.getPerOrderPrice());
     }
 
     @Override

@@ -43,6 +43,14 @@ public class User {
         return discountService.getIsWeekday();
     }
 
+    public int getDiscountWeekday(){
+        return discountWeekday;
+    }
+
+    public int getDiscountWeekend(){
+        return discountWeekend;
+    }
+
     public int getDiscountChampange(){
         return discountChampange;
     }
@@ -55,6 +63,16 @@ public class User {
     public String getBadge(){
         calcBadge();
         return badge;
+    }
+
+    public boolean isWeekdayDiscountExist(){
+        calcWeekdayDiscount();
+        return discountWeekday != 0;
+    }
+
+    public boolean isWeekendDiscountExist(){
+        calcWeekendDiscount();
+        return discountWeekend != 0;
     }
 
     public void reserveDate(int reservationDate){
