@@ -128,4 +128,13 @@ public class OrderService {
         requestFinalPriceInfo();
         requestBadgeInfo();
     }
+
+    // TODO : for next year promotion
+    public int calcChristmasTotalSellingPrice(){
+        int totalSellingPrice = 0;
+        for(User user: customers){
+            totalSellingPrice += user.getFinalPrice();
+        }
+        return totalSellingPrice;
+    }
 }
