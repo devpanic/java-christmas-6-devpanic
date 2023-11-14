@@ -4,6 +4,10 @@ public class Gift {
     private int totalPurchase;
     private int totalDiscount;
 
+    public Gift(int totalPurchase){
+        this.totalPurchase = totalPurchase;
+    }
+
     public Gift(int totalPurchase, int totalDiscount){
         this.totalPurchase = totalPurchase;
         this.totalDiscount = totalDiscount;

@@ -53,4 +53,17 @@ public class User {
         }
         return totalOrderPrice;
     }
+
+    public boolean makeGiftInfo(){
+        Gift giftService = new Gift(totalOrderPrice);
+        this.giveChampange = giftService.giveChampagne();
+
+        if(this.giveChampange){
+            this.discountChampange = 25000;
+            return true;
+        }
+
+        this.discountChampange = 0;
+        return false;
+    }
 }

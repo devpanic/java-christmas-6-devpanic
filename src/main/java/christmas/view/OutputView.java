@@ -8,6 +8,10 @@ public class OutputView {
         System.out.println("");
     }
 
+    public void printNothing(){
+        System.out.println(Messages.NOTHING.getMessage());
+    }
+
     public void printWelcomeMessage(){
         System.out.println(Messages.WELCOME.getMessage());
     }
@@ -45,5 +49,13 @@ public class OutputView {
 
     public void printTotalPriceContentMessage(int totalPrice){
         System.out.println(makeIntegerFormat(totalPrice) + "원");
+    }
+
+    public void printGiftTitleMessage(){
+        System.out.println(Messages.GIFT_CHAMPANGE_TITLE.getMessage());
+    }
+
+    public void printGiftContentMessage(){
+        System.out.println(Messages.GIFT_CHAMPANGE.getMessage());
     }
 }

@@ -37,10 +37,20 @@ public class OrderService {
         outputView.printSpace();
     }
 
+    public void requestGiftInfo(){
+        outputView.printGiftTitleMessage();
+        if(currentCustomer.makeGiftInfo()){
+            outputView.printGiftContentMessage();
+            return;
+        }
+        outputView.printNothing();
+    }
+
     public void doOrder(){
         createUser();
         requestOrder();
         requestOrderInfo();
         requestTotalPriceInfo();
+        requestGiftInfo();
     }
 }
