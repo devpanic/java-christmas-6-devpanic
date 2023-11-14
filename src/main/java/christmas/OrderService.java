@@ -22,7 +22,14 @@ public class OrderService {
         currentCustomer.reserveDate(inputView.inputDate());
 
         outputView.printTakeOrderMessage();
-        currentCustomer.makeReservation(inputView.inputAllOrder());
+        while(true){
+            try{
+                currentCustomer.makeReservation(inputView.inputAllOrder());
+                return;
+            } catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     public void requestOrderInfo(){

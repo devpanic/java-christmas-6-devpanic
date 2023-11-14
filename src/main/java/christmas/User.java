@@ -16,14 +16,10 @@ public class User {
     private int totalDiscount;
     private boolean giveChampange;
     private String badge;
+    Validation validator;
 
     public User(){
         this.totalOrderPrice = 0;
-    }
-
-    public String getBadge(){
-        calcBadge();
-        return badge;
     }
 
     public List<Order> getOrderMenuSet(){
@@ -39,6 +35,10 @@ public class User {
         return totalDiscount;
     }
 
+    public int getFinalPrice(){
+        return totalOrderPrice - totalDiscount;
+    }
+
     public boolean getIsWeekday(){
         return discountService.getIsWeekday();
     }
@@ -52,8 +52,9 @@ public class User {
         return discountSpecial;
     }
 
-    public int getFinalPrice(){
-        return totalOrderPrice - totalDiscount;
+    public String getBadge(){
+        calcBadge();
+        return badge;
     }
 
     public void reserveDate(int reservationDate){
@@ -68,6 +69,9 @@ public class User {
             order.makeDiscountInfo(discountService.dayDessertDiscount(), discountService.dayMainDishDiscount());
         }
         this.orderMenuSet = reservationMenuSet;
+
+        validator = new Validation();
+        validator.checkOnlyDrink(reservationMenuSet);
     }
 
     public boolean makeGiftInfo(){

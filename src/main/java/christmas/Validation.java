@@ -39,4 +39,16 @@ public class Validation {
             throw new IllegalArgumentException(ErrorMessages.INPUT_ORDER.getMessage());
         }
     }
+
+    public void checkOnlyDrink(List<Order> toCheck){
+        int drinkCount = 0;
+        for(Order order : toCheck){
+            if(order.getMenuCategory().equals("Drinks")){
+                drinkCount++;
+            }
+        }
+        if(drinkCount == toCheck.size()){
+            throw new IllegalArgumentException(ErrorMessages.INPUT_ONLY_DRINK.getMessage());
+        }
+    }
 }

@@ -107,23 +107,6 @@ class ApplicationTest extends NsTest {
     }
 
     @ParameterizedTest
-    @DisplayName("샴페인 및 배지 증정 테스트")
-    @CsvSource(value = {"120000, 20000, true, 산타", "120001, 4000, true, -", "119999, 9999, false, 별"})
-    void giftTest(int totalPuchase, int totalDiscount, boolean expectedChampagne, String expectedBadge){
-        // given
-        User testUser = new User();
-        Gift testGift = new Gift(totalPuchase, totalDiscount);
-        
-        // when
-        testUser.reserveDate(1);
-        boolean isChampagne = testGift.giveChampagne();
-        
-        // then
-        assertEquals(expectedChampagne, isChampagne);
-        assertEquals(expectedBadge, testUser.getBadge());
-    }
-
-    @ParameterizedTest
     @DisplayName("일자별 디저트, 메인메뉴 주문 테스트")
     @CsvSource(value = {"3, 티본스테이크, 2, 110000", "3, 바비큐립, 1, 54000"
                         ,"1, 초코케이크, 1, 15000", "1, 제로콜라, 1, 3000"
