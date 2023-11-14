@@ -21,11 +21,8 @@ public class User {
         this.totalOrderPrice = 0;
     }
 
-    public void setBadge(String badge){
-        this.badge = badge;
-    }
-
     public String getBadge(){
+        calcBadge();
         return badge;
     }
 
@@ -53,6 +50,10 @@ public class User {
     public int getDiscountSpecial(){
         calcSpecialDiscount();
         return discountSpecial;
+    }
+
+    public int getFinalPrice(){
+        return totalOrderPrice - totalDiscount;
     }
 
     public void reserveDate(int reservationDate){
@@ -123,5 +124,11 @@ public class User {
         this.totalDiscount += discountWeekend;
         this.totalDiscount += discountChampange;
         return totalDiscount;
+    }
+
+    public String calcBadge(){
+        Gift giftService = new Gift(totalOrderPrice, totalDiscount);
+        this.badge = giftService.giveBadge();
+        return badge;
     }
 }

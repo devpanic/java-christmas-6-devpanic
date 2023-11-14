@@ -81,6 +81,7 @@ public class OrderService {
         outputView.printDiscountTitleMessage();
         if(currentCustomer.getTotalOrderPrice() < 10000){
             outputView.printNothing();
+            outputView.printSpace();
             return;
         }
         requestDdayDiscountInfo();
@@ -93,6 +94,18 @@ public class OrderService {
     public void requestTotalDiscountInfo(){
         outputView.printDiscountTotalTitleMessage();
         outputView.printDiscountTotalContentMessage(currentCustomer.getTotalDiscountPrice());
+        outputView.printSpace();
+    }
+
+    public void requestFinalPriceInfo(){
+        outputView.printFinalPriceTitleMessage();
+        outputView.printPriceContentMessage(currentCustomer.getFinalPrice());
+        outputView.printSpace();
+    }
+
+    public void requestBadgeInfo(){
+        outputView.printBadgeTitleMessage();
+        outputView.printBadgeContentMessage(currentCustomer.getBadge());
     }
 
     public void doOrder(){
@@ -103,5 +116,7 @@ public class OrderService {
         requestGiftInfo();
         requestDiscountInfo();
         requestTotalDiscountInfo();
+        requestFinalPriceInfo();
+        requestBadgeInfo();
     }
 }

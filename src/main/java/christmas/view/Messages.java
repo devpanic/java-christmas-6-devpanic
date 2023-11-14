@@ -7,6 +7,7 @@ public enum Messages {
     TOTAL_MENU_INFO("<주문 메뉴>"),
     TOTAL_PRICE_BEFORE("<할인 전 총주문 금액>"),
     GIFT_CHAMPANGE_INFO("<증정 메뉴>"),
+    GIFT_CHAMPANGE("샴페인 1개"),
     DISCOUNT_INFO("<혜택 내역>"),
     DISCOUNT_DDAY("크리스마스 디데이 할인: -"),
     DISCOUNT_WEEKDAY("평일 할인: -"),
@@ -14,7 +15,8 @@ public enum Messages {
     DISCOUNT_SPECIAL("특별 할인: -"),
     DISCOUNT_GIFT("증정 이벤트: -"),
     DISCOUNT_TOTAL_INFO("<총혜택 금액>"),
-    GIFT_CHAMPANGE("샴페인 1개"),
+    FINAL_PRICE("<할인 후 예상 결제 금액>"),
+    BADGE("<12월 이벤트 배지>"),
     NOTHING("없음");
 
     private String message;

@@ -117,7 +117,6 @@ class ApplicationTest extends NsTest {
         // when
         testUser.reserveDate(1);
         boolean isChampagne = testGift.giveChampagne();
-        testGift.giveBadge(testUser);
         
         // then
         assertEquals(expectedChampagne, isChampagne);

@@ -41,15 +41,14 @@ public class Gift {
         return false;
     }
 
-    public void giveBadge(User user){
-        user.setBadge("-");
-
+    public String giveBadge(){
         if(isGiveSanta()){
-            user.setBadge("산타");
+            return "산타";
         } else if (isGiveTree()){
-            user.setBadge("트리");
+            return "트리";
         } else if (isGiveStar()){
-            user.setBadge("별");
+            return "별";
         }
+        return "없음";
     }
 }

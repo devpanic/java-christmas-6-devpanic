@@ -88,6 +88,22 @@ public class OutputView {
     }
 
     public void printDiscountTotalContentMessage(int totalDiscount){
-        System.out.println("-" + makeIntegerFormat(totalDiscount));
+        if(totalDiscount != 0){
+            System.out.println("-" + makeIntegerFormat(totalDiscount));
+        } else if(totalDiscount == 0){
+            System.out.println("0원");
+        }
+    }
+
+    public void printFinalPriceTitleMessage(){
+        System.out.println(Messages.FINAL_PRICE.getMessage());
+    }
+
+    public void printBadgeTitleMessage(){
+        System.out.println(Messages.BADGE.getMessage());
+    }
+
+    public void printBadgeContentMessage(String badge){
+        System.out.println(badge);
     }
 }
