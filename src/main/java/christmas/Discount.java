@@ -3,14 +3,20 @@ package christmas;
 public class Discount {
     private int inputDate;
     private Days inputDay;
+    private boolean isWeekday;
 
     public Discount(int inputDate, Days inputDay){
         this.inputDate = inputDate;
         this.inputDay = inputDay;
     }
 
+    public boolean getIsWeekday(){
+        return this.isWeekday;
+    }
+
     public int dayDessertDiscount(){
         if(inputDay.isDessertsDiscount()){
+            this.isWeekday = true;
             return 2023;
         }
         return 0;
@@ -18,6 +24,7 @@ public class Discount {
 
     public int dayMainDishDiscount(){
         if(inputDay.isMainDishDiscount()){
+            this.isWeekday = false;
             return 2023;
         }
         return 0;

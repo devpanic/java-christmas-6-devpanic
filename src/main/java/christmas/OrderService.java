@@ -33,7 +33,7 @@ public class OrderService {
 
     public void requestTotalPriceInfo(){
         outputView.printTotalPriceTitleMessage();
-        outputView.printTotalPriceContentMessage(currentCustomer.calcOrderVanillaPrice());
+        outputView.printPriceContentMessage(currentCustomer.calcOrderVanillaPrice());
         outputView.printSpace();
     }
 
@@ -41,9 +41,58 @@ public class OrderService {
         outputView.printGiftTitleMessage();
         if(currentCustomer.makeGiftInfo()){
             outputView.printGiftContentMessage();
+            outputView.printSpace();
             return;
         }
         outputView.printNothing();
+        outputView.printSpace();
+    }
+
+    public void requestDdayDiscountInfo(){
+        outputView.printDiscountDdayMessage();
+        outputView.printPriceContentMessage(currentCustomer.calcDdayDiscount());
+    }
+
+    public void requestWeekDiscountInfo(){
+        if(currentCustomer.getIsWeekday()){
+            outputView.printDiscountWeekdayMessage();
+            outputView.printPriceContentMessage(currentCustomer.calcWeekdayDiscount());
+        } else if(!currentCustomer.getIsWeekday()){
+            outputView.printDiscountWeekendMessage();
+            outputView.printPriceContentMessage(currentCustomer.calcWeekendDiscount());
+        }
+    }
+
+    public void requestSpecialDiscountInfo(){
+        if(currentCustomer.getDiscountSpecial() == 1000){
+            outputView.printDiscountSpecialMessage();
+            outputView.printPriceContentMessage(currentCustomer.getDiscountSpecial());
+        }
+    }
+
+    public void requestGiftDiscountInfo(){
+        if(currentCustomer.getDiscountChampange() == 25000){
+            outputView.printDiscountGiftMessage();
+            outputView.printPriceContentMessage(currentCustomer.getDiscountChampange());
+        }
+    }
+
+    public void requestDiscountInfo(){
+        outputView.printDiscountTitleMessage();
+        if(currentCustomer.getTotalOrderPrice() < 10000){
+            outputView.printNothing();
+            return;
+        }
+        requestDdayDiscountInfo();
+        requestWeekDiscountInfo();
+        requestSpecialDiscountInfo();
+        requestGiftDiscountInfo();
+        outputView.printSpace();
+    }
+
+    public void requestTotalDiscountInfo(){
+        outputView.printDiscountTotalTitleMessage();
+        outputView.printDiscountTotalContentMessage(currentCustomer.getTotalDiscountPrice());
     }
 
     public void doOrder(){
@@ -52,5 +101,7 @@ public class OrderService {
         requestOrderInfo();
         requestTotalPriceInfo();
         requestGiftInfo();
+        requestDiscountInfo();
+        requestTotalDiscountInfo();
     }
 }

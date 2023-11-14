@@ -33,6 +33,10 @@ public class Order {
         return perOrderPrice;
     }
 
+    public int getPerOrderDiscount(){
+        return perOrderDiscount;
+    }
+
     public void isAppetizer(){
         Appetizers currentMenu = Appetizers.findAppetizer(menu);
 

@@ -1,7 +1,6 @@
 package christmas;
 
 import java.util.List;
-import org.mockito.internal.matchers.Or;
 
 public class User {
     private int reservationDate;
@@ -10,8 +9,9 @@ public class User {
     private Discount discountService;
     private int totalOrderPrice;
     private int discountDday;
-    private int discountDessert;
-    private int discountMainDish;
+    private int discountWeekday;
+    private int discountWeekend;
+    private int discountSpecial;
     private int discountChampange;
     private int totalDiscount;
     private boolean giveChampange;
@@ -33,6 +33,28 @@ public class User {
         return orderMenuSet;
     }
 
+    public int getTotalOrderPrice(){
+        return totalOrderPrice;
+    }
+
+    public int getTotalDiscountPrice(){
+        calcTotalDiscount();
+        return totalDiscount;
+    }
+
+    public boolean getIsWeekday(){
+        return discountService.getIsWeekday();
+    }
+
+    public int getDiscountChampange(){
+        return discountChampange;
+    }
+
+    public int getDiscountSpecial(){
+        calcSpecialDiscount();
+        return discountSpecial;
+    }
+
     public void reserveDate(int reservationDate){
         this.reservationDate = reservationDate;
     }
@@ -47,13 +69,6 @@ public class User {
         this.orderMenuSet = reservationMenuSet;
     }
 
-    public int calcOrderVanillaPrice(){
-        for(Order order : orderMenuSet){
-            totalOrderPrice += order.getPerOrderPrice();
-        }
-        return totalOrderPrice;
-    }
-
     public boolean makeGiftInfo(){
         Gift giftService = new Gift(totalOrderPrice);
         this.giveChampange = giftService.giveChampagne();
@@ -62,8 +77,51 @@ public class User {
             this.discountChampange = 25000;
             return true;
         }
-
         this.discountChampange = 0;
         return false;
+    }
+
+    public int calcOrderVanillaPrice(){
+        for(Order order : orderMenuSet){
+            totalOrderPrice += order.getPerOrderPrice();
+        }
+        return totalOrderPrice;
+    }
+
+    public int calcDdayDiscount(){
+        this.discountDday = discountService.dDayDiscount();
+        return discountDday;
+    }
+
+    public int calcWeekdayDiscount(){
+        if(discountService.getIsWeekday()){
+            for(Order order : orderMenuSet){
+                this.discountWeekday += order.getPerOrderDiscount();
+            }
+        }
+        return discountWeekday;
+    }
+
+    public int calcWeekendDiscount(){
+        if(!discountService.getIsWeekday()){
+            for(Order order : orderMenuSet){
+                this.discountWeekend += order.getPerOrderDiscount();
+            }
+        }
+        return discountWeekend;
+    }
+
+    public int calcSpecialDiscount(){
+        this.discountSpecial = discountService.specialDayDiscount();
+        return discountSpecial;
+    }
+
+    public int calcTotalDiscount(){
+        this.totalDiscount += discountDday;
+        this.totalDiscount += discountSpecial;
+        this.totalDiscount += discountWeekday;
+        this.totalDiscount += discountWeekend;
+        this.totalDiscount += discountChampange;
+        return totalDiscount;
     }
 }
